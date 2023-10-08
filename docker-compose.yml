@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  nginx:
+    build:
+      context: ./requirements/nginx
+    volumes:
+      - wp_files:/var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - wordpress
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    volumes:
+      - wp_files:/var/www/html
+    environment:
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_USER=${MYSQL_USER}
+      - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
+      - WORDPRESS_DB_NAME=wordpress
+    depends_on:
+      - mariadb
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+volumes:
+  db_data:
+  wp_files:
