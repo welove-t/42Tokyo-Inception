@@ -2,8 +2,9 @@ version: '3.7'
 
 services:
   nginx:
-    build:
-      context: ./requirements/nginx
+    image: nginx
+    # build:
+    #   context: ./requirements/nginx
     volumes:
       - wp_files:/var/www/html
     ports:
@@ -15,8 +16,9 @@ services:
       - DOMAIN_NAME=${DOMAIN_NAME}
 
   wordpress:
-    build:
-      context: ./requirements/wordpress
+    image: wordpress
+    # build:
+    #   context: ./requirements/wordpress
     volumes:
       - wp_files:/var/www/html
     environment:
@@ -28,8 +30,9 @@ services:
       - mariadb
 
   mariadb:
-    build:
-      context: ./requirements/mariadb
+    image: mariadb
+    # build:
+    #   context: ./requirements/mariadb
     volumes:
       - db_data:/var/lib/mysql
     environment:
