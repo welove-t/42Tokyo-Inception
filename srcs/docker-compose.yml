@@ -30,9 +30,9 @@ services:
       - mariadb
 
   mariadb:
-    image: mariadb
-    # build:
-    #   context: ./requirements/mariadb
+    # image: mariadb
+    build:
+      context: ./requirements/mariadb
     volumes:
       - db_data:/var/lib/mysql
     environment:
