@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
+COPY ./conf/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+
 EXPOSE 3306
 
 CMD [ "mysqld" ]
