@@ -16,9 +16,9 @@ services:
       - DOMAIN_NAME=${DOMAIN_NAME}
 
   wordpress:
-    image: wordpress
-    # build:
-    #   context: ./requirements/wordpress
+    # image: wordpress
+    build:
+      context: ./requirements/wordpress
     volumes:
       - wp_files:/var/www/html
     environment:
@@ -30,7 +30,6 @@ services:
       - mariadb
 
   mariadb:
-    # image: mariadb
     build:
       context: ./requirements/mariadb
     volumes:
