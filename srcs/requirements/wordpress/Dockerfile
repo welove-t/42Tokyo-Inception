@@ -14,6 +14,9 @@ RUN apt-get update \
     php-imagick \
     php-xml \
     php-zip \
+    mariadb-client \
+    iputils-ping \
+    net-tools \
     sudo \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
