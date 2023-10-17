@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
   nginx:
-    image: nginx
-    # build:
-    #   context: ./requirements/nginx
+    # image: nginx
+    build:
+      context: ./requirements/nginx
     volumes:
       - wp_files:/var/www/html
     ports:

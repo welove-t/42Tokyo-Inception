@@ -1,0 +1,14 @@
+FROM debian:bullseye-slim
+
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx
+
+# Copy custom configurations
+COPY conf/default.conf /etc/nginx/sites-available/default
+COPY tools/docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod +x /docker-entrypoint.sh
+
+EXPOSE 80
+
+CMD ["/docker-entrypoint.sh"]
