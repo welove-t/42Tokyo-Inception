@@ -7,6 +7,18 @@ set -e # エラーが発生した場合、スクリプトを停止
 : "${WORDPRESS_DB_PASSWORD:?Need to set WORDPRESS_DB_PASSWORD}"
 : "${WORDPRESS_DB_NAME:=wordpress}" # Default to 'wordpress' if not set
 
+# MariaDBが起動するまで待機する関数
+wait_for_mariadb() {
+    while ! mysqladmin ping -h"$WORDPRESS_DB_HOST" --silent; do
+        echo "Waiting for mariadb to be available..."
+        sleep 5
+    done
+    echo "MariaDB is up and running."
+}
+
+# MariaDBが起動するまで待機
+wait_for_mariadb
+
 # WordPressの設定ファイルを生成
 if [ ! -f wp-config.php ]; then
     wp --allow-root core config --dbname="${WORDPRESS_DB_NAME}" --dbuser="${WORDPRESS_DB_USER}" --dbpass="${WORDPRESS_DB_PASSWORD}" --dbhost="${WORDPRESS_DB_HOST}"
