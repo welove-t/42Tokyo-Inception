@@ -14,6 +14,8 @@ services:
       - wordpress
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
+    networks:
+      - net_container
 
   wordpress:
     # image: wordpress
@@ -28,6 +30,8 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     depends_on:
       - mariadb
+    networks:
+      - net_container
 
   mariadb:
     build:
@@ -35,10 +39,17 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - net_container
+    hostname: mariadb
 
 volumes:
   db_data:
   wp_files:
+
+networks:
+  net_container:
