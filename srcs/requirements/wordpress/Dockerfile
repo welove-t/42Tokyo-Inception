@@ -32,8 +32,9 @@ WORKDIR /var/www/html
 RUN wp --allow-root core download
 
 # PHP-FPMの設定
-RUN sed -i "s/listen = .*/listen = 9000/" /etc/php/7.4/fpm/pool.d/www.conf \
-    && sed -i "s/;listen.allowed_clients = .*/listen.allowed_clients = nginx/" /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i "s/listen = .*/listen = 0.0.0.0:9000/" /etc/php/7.4/fpm/pool.d/www.conf \
+    # && sed -i "s/;listen.allowed_clients = .*/listen.allowed_clients = nginx/" /etc/php/7.4/fpm/pool.d/www.conf
+    && sed -i "s/^listen.allowed_clients/;listen.allowed_clients/" /etc/php/7.4/fpm/pool.d/www.conf
 
 # PIDファイルのためのディレクトリを作成
 RUN mkdir -p /run/php/
