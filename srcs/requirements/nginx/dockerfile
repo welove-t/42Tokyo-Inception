@@ -1,10 +1,11 @@
 FROM debian:bullseye-slim
 
 # Install Nginx
-RUN apt-get update && apt-get install -y nginx
+RUN apt-get update && apt-get install -y nginx curl iputils-ping vim
 
 # Copy custom configurations
-COPY conf/default.conf /etc/nginx/sites-available/default
+# COPY conf/default.conf /etc/nginx/conf.d/default.conf
+COPY conf/default.conf /etc/nginx/sites-enabled/default
 COPY tools/docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN chmod +x /docker-entrypoint.sh
