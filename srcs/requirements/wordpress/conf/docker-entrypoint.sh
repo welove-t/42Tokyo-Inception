@@ -29,10 +29,9 @@ if ! $(wp --allow-root core is-installed); then
     wp --allow-root core install --url="${WORDPRESS_URL}" --title="Your WordPress Site" --admin_user="${WORDPRESS_ADMIN_USER}" --admin_password="${WORDPRESS_ADMIN_PASSWORD}" --admin_email="admin@example.com"
     # 一般ユーザー作成
     wp --allow-root user create "${WORDPRESS_USER}" user@example.com --user_pass="${WORDPRESS_PASSWORD}" --role=subscriber
+    # 登録ユーザーのみコメントができるように設定
+    wp --allow-root option update comment_registration 1
 fi
-
-# 登録ユーザーのみコメントができるように設定
-# wp option update comment_registration 1
 
 # PHP-FPMを起動
 exec php-fpm7.4 -F
