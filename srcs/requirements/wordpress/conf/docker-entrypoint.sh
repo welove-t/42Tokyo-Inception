@@ -26,7 +26,12 @@ fi
 
 # WordPressが未インストールの場合、インストールする
 if ! $(wp --allow-root core is-installed); then
-    wp --allow-root core install --url="localhost" --title="Your WordPress Site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
+    wp --allow-root core install --url="${WORDPRESS_URL}" --title="Your WordPress Site" --admin_user="admin" --admin_password="password" --admin_email="admin@example.com"
+fi
+
+# 一般ユーザー作成
+if ! $(wp --allow-root user exists user); then
+    wp --allow-root user create user user@example.com --user_pass=password --role=subscriber
 fi
 
 # PHP-FPMを起動
