@@ -1,8 +1,14 @@
+VOLUME_PATH=$(shell grep VOLUME_PATH srcs/.env | cut -d '=' -f2)
+
 all: up
 
+prepare-directories:
+	sudo mkdir -p ${VOLUME_PATH}/web
+	sudo mkdir -p ${VOLUME_PATH}/db
+
 # コンテナをバックグラウンドで起動
-up:
-	cd srcs && docker-compose up -d
+up: prepare-directories
+	cd srcs && docker-compose up --build -d
 
 # コンテナのビルド
 build:
@@ -19,3 +25,5 @@ down:
 # コンテナ、イメージ、ボリューム、ネットワークを削除
 clean:
 	cd srcs && docker-compose down --rmi all --volumes
+	sudo rm -rf $(VOLUME_PATH)/web
+	sudo rm -rf $(VOLUME_PATH)/db
