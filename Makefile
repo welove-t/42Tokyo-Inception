@@ -18,8 +18,4 @@ down:
 
 # コンテナ、イメージ、ボリューム、ネットワークを削除
 clean:
-	docker stop $(docker ps -qa) || true
-	docker rm $(docker ps -qa) || true
-	docker rmi -f $(docker images -qa) || true
-	docker volume rm $(docker volume ls -q) || true
-	docker network rm $(docker network ls -q) || true
+	cd srcs && docker-compose down --rmi all --volumes
