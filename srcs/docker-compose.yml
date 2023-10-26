@@ -52,8 +52,18 @@ services:
     hostname: mariadb
 
 volumes:
-  db_data:
   wp_files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_PATH}/web
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${VOLUME_PATH}/db
 
 networks:
   net_container:
