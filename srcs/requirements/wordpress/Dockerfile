@@ -40,7 +40,7 @@ RUN sed -i "s/listen = .*/listen = 0.0.0.0:9000/" /etc/php/7.4/fpm/pool.d/www.co
 RUN mkdir -p /run/php/
 
 # WordPressセットアップスクリプトを追加
-COPY ./conf/docker-entrypoint.sh /usr/local/bin/
+COPY ./tools/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # docker-entrypoint.shを起動
