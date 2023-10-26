@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   nginx:
-    # image: nginx
+    container_name: nginx
     build:
       context: ./requirements/nginx
     volumes:
@@ -17,7 +17,7 @@ services:
       - net_container
 
   wordpress:
-    # image: wordpress
+    container_name: wordpress
     build:
       context: ./requirements/wordpress
     volumes:
@@ -38,6 +38,7 @@ services:
       - net_container
 
   mariadb:
+    container_name: mariadb
     build:
       context: ./requirements/mariadb
     volumes:
