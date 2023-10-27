@@ -5,6 +5,7 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx
+    image: nginx
     volumes:
       - wp_files:/var/www/html
     ports:
@@ -20,6 +21,7 @@ services:
     container_name: wordpress
     build:
       context: ./requirements/wordpress
+    image: wordpress
     volumes:
       - wp_files:/var/www/html
     environment:
@@ -41,6 +43,7 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
+    image: mariadb
     volumes:
       - db_data:/var/lib/mysql
     environment:
