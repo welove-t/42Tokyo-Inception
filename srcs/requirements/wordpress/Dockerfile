@@ -43,5 +43,9 @@ RUN mkdir -p /run/php/
 COPY ./tools/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+# Adminerの設定
+ADD https://www.adminer.org/latest.php /var/www/html/adminer.php
+RUN chmod 755 /var/www/html/adminer.php
+
 # docker-entrypoint.shを起動
 CMD ["/usr/local/bin/docker-entrypoint.sh"]
