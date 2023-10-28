@@ -5,7 +5,7 @@ set -e # エラーが発生した場合、スクリプトを停止
 : "${WORDPRESS_DB_HOST:?Need to set WORDPRESS_DB_HOST}"
 : "${WORDPRESS_DB_USER:?Need to set WORDPRESS_DB_USER}"
 : "${WORDPRESS_DB_PASSWORD:?Need to set WORDPRESS_DB_PASSWORD}"
-: "${WORDPRESS_DB_NAME:=wordpress}" # Default to 'wordpress' if not set
+: "${WORDPRESS_DB_NAME:=wordpress}" 
 
 # MariaDBが起動するまで待機する関数
 wait_for_mariadb() {
