@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Replace the DOMAIN_NAME placeholder
+# 設定ファイル上のDOMAIN_NAMEを置き換え
 sed -i "s/\${DOMAIN_NAME}/${DOMAIN_NAME}/g" /etc/nginx/sites-available/default
 
 # /var/www/htmlの所有者をwww-dataに変更する。
